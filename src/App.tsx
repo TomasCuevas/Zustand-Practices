@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 //* stores *//
 import { useCounterStore } from "./store/counter.store";
 
@@ -5,13 +7,21 @@ import { useCounterStore } from "./store/counter.store";
 import "./App.css";
 
 function App() {
-  const count = useCounterStore((state) => state.count);
-  const increment = useCounterStore((state) => state.increment);
+  const { count, posts } = useCounterStore((state) => state);
+  const { getPosts, increment } = useCounterStore((state) => state);
+
+  useEffect(() => {
+    getPosts();
+  }, []);
 
   return (
     <div>
       <h1>Counter: {count}</h1>
       <button onClick={() => increment(10)}>Increment by 10</button>
+
+      <hr />
+
+      {JSON.stringify(posts, null, 4)}
     </div>
   );
 }
