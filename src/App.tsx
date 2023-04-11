@@ -8,7 +8,9 @@ import "./App.css";
 
 function App() {
   const { count, posts } = useCounterStore((state) => state);
-  const { getPosts, increment } = useCounterStore((state) => state);
+  const { getPosts, increment, clearStore, multiply } = useCounterStore(
+    (state) => state
+  );
 
   useEffect(() => {
     getPosts();
@@ -18,6 +20,8 @@ function App() {
     <div>
       <h1>Counter: {count}</h1>
       <button onClick={() => increment(10)}>Increment by 10</button>
+      <button onClick={() => multiply(2)}>Multiply by 2</button>
+      <button onClick={() => clearStore()}>Clear</button>
 
       <hr />
 
